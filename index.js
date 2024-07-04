@@ -1,33 +1,24 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dicee</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./styles.css" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Indie+Flower|Lobster"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div class="container">
-      <div>
-        <h1>Click Me!</h1>
-        <button id="myButton" type="button" class="btn btn-outline-secondary btn-lg px-4 me-md-2 mb-5" >Roll the dice!!</button>
-      </div>
-      <div class="dice">
-        <p>Player 1</p>
-        <img class="img1" src="./images/dice6.png" />
-      </div>
+function buttonPressed() {
+  var randomVariable1 = Math.floor(Math.random() * 6) + 1;
+  var randomVariable2 = Math.floor(Math.random() * 6) + 1;
+  document
+    .querySelector(".img1")
+    .setAttribute("src", "./images/dice" + randomVariable1 + ".png");
+  document
+    .querySelector(".img2")
+    .setAttribute("src", "./images/dice" + randomVariable2 + ".png");
 
-      <div class="dice">
-        <p>Player 2</p>
-        <img class="img2" src="./images/dice6.png" />
-      </div>
-    </div>
+  if (randomVariable1 > randomVariable2) {
+    document.querySelector("h1").textContent = "🚩 Player 1 Wins !";
+  } else if (randomVariable1 < randomVariable2) {
+    document.querySelector("h1").textContent = "Player 2 Wins ! 🚩";
+  } else {
+    document.querySelector("h1").textContent = "Draw !";
+  }
+}
 
-    <script src="./index.js"></script>
-  </body>
-</html>
+// Adding an event listener to the button
+document.addEventListener("DOMContentLoaded", (event) => {
+  const button = document.getElementById("myButton");
+  button.addEventListener("click", buttonPressed);
+});
